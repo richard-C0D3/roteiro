@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Menorca em 8 dias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="painel">
+        <header class="topo">
+          <h1>Menorca</h1>
+          <p class="sub">Oito dias à volta da ilha, de carro</p>
+        </header>
+        <nav class="dias" id="dias" aria-label="Escolher dia"></nav>
+        <section class="resumo" id="resumo" aria-live="polite"></section>
+        <ol class="paragens" id="paragens"></ol>
+      </aside>
+      <main id="mapa" class="mapa" aria-label="Mapa do roteiro"></main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

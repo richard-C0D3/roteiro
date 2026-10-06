@@ -1,0 +1,212 @@
+:root {
+  --cal: #fafbfa;      /* paredes caiadas */
+  --mar: #0b3c49;      /* mar fundo */
+  --agua: #2bb3b1;     /* água das calas */
+  --mares: #c9a15b;    /* pedra de marès */
+  --pedra: #5f6b6d;
+  --linha: #e1e6e5;
+  --serif: "Young Serif", Georgia, "Times New Roman", serif;
+  --sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: var(--sans);
+  color: var(--mar);
+  background: var(--cal);
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--agua); outline-offset: 2px; }
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) 1fr;
+  height: 100%;
+}
+
+/* ---------- Painel ---------- */
+.painel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--linha);
+  background: var(--cal);
+}
+
+.topo { padding: 28px 24px 12px; }
+.topo h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 3.2rem;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.sub { margin: 8px 0 0; color: var(--pedra); }
+
+.dias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 24px 16px;
+}
+.dia {
+  border: 1px solid var(--linha);
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 12px 6px 10px;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.dia::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cor);
+}
+.dia[aria-pressed="true"] {
+  background: var(--cor);
+  border-color: var(--cor);
+  color: #fff;
+}
+.dia[aria-pressed="true"]::before { background: #fff; }
+
+.resumo {
+  margin: 0 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
+}
+.resumo h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 0 0 4px;
+  color: var(--cor, var(--mar));
+}
+.resumo p { margin: 0; line-height: 1.5; }
+.nota { display: block; color: var(--pedra); font-size: 0.875rem; margin-top: 2px; }
+
+/* ---------- Lista ---------- */
+.paragens {
+  list-style: none;
+  margin: 0;
+  padding: 8px 12px 32px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.cabecalho-dia button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 18px 12px 6px;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--cor);
+}
+.cabecalho-dia span { font-family: var(--sans); font-size: 0.9rem; color: var(--pedra); }
+.cabecalho-dia button:focus-visible { outline: 2px solid var(--agua); }
+
+.paragem button {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 10px;
+  position: relative;
+}
+.paragem button:hover { background: #fff; }
+
+/* linha vertical a ligar as paragens do mesmo dia */
+.paragem + .paragem button::before {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: -10px;
+  height: 20px;
+  border-left: 2px solid var(--cor);
+  opacity: 0.35;
+}
+
+.num {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--cor);
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.paragem--pe .num,
+.paragem--barco .num,
+.paragem--vista .num {
+  background: var(--cal);
+  color: var(--cor);
+  box-shadow: inset 0 0 0 2px var(--cor);
+}
+
+.texto { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.nome { font-weight: 600; }
+.desc { color: var(--pedra); font-size: 0.9rem; line-height: 1.4; }
+.acesso {
+  flex: none;
+  font-size: 0.75rem;
+  color: #7a5a1e;
+  background: color-mix(in srgb, var(--mares) 22%, white);
+  border-radius: 6px;
+  padding: 3px 7px;
+  margin-top: 3px;
+}
+
+/* ---------- Mapa ---------- */
+.mapa { height: 100%; min-height: 0; background: #d7e8ea; }
+
+.pino-wrap { background: none; border: 0; }
+.pino {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--cor);
+  color: #fff;
+  font: 600 12px/1 var(--sans);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgb(11 60 73 / 0.35);
+}
+.pino--leve { background: #fff; color: var(--cor); border-color: var(--cor); }
+.pino--base { background: var(--mar); width: 30px; height: 30px; font-size: 16px; }
+
+.leaflet-popup-content { font-family: var(--sans); font-size: 0.9rem; line-height: 1.45; }
+.leaflet-popup-content strong { font-family: var(--serif); font-weight: 400; font-size: 1.05rem; }
+
+/* ---------- Telemóvel ---------- */
+@media (max-width: 800px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: 45vh 1fr; }
+  .mapa { grid-row: 1; }
+  .painel { grid-row: 2; border-right: 0; border-top: 1px solid var(--linha); overflow-y: auto; }
+  .paragens { overflow: visible; }
+  .topo { padding-top: 18px; }
+  .topo h1 { font-size: 2.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
