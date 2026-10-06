@@ -19,6 +19,8 @@ body {
 }
 button { font: inherit; color: inherit; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--agua); outline-offset: 2px; }
+/* Chrome desenha um retângulo à volta da linha (bounding box) quando se clica num trajeto */
+.leaflet-interactive:focus { outline: none; }
 
 .app {
   display: grid;

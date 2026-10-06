@@ -19,6 +19,10 @@ const elParagens = document.getElementById("paragens")!;
 // ---------- Mapa ----------
 const mapa = L.map("mapa", { zoomControl: false }).setView([39.95, 4.08], 10);
 L.control.zoom({ position: "bottomright" }).addTo(mapa);
+// Clique numa zona vazia do mapa volta a mostrar todos os dias
+mapa.on("click", () => {
+  if (diaAtivo !== null) selecionarDia(null);
+});
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -59,10 +63,20 @@ function construirGrupo(dia: Dia): L.LayerGroup {
 function desenharRota(n: number, rota: Rota): void {
   const grupo = grupos.get(n);
   if (!grupo || rota.coords.length < 2) return;
-  const opcoes = rota.aproximada ? { dashArray: "6 8" } : {};
+  // bubblingMouseEvents: false → o clique na linha não chega ao mapa (que voltaria a "Todos")
+  const opcoes = { bubblingMouseEvents: false, ...(rota.aproximada ? { dashArray: "6 8" } : {}) };
+  const dia = DIAS.find((d) => d.numero === n);
   // contorno branco primeiro, linha colorida por cima (os marcadores ficam sempre acima)
-  L.polyline(rota.coords, { color: "#fff", weight: 8, opacity: 0.9, ...opcoes }).addTo(grupo);
-  L.polyline(rota.coords, { color: corDoDia(n), weight: 4.5, opacity: 0.95, ...opcoes }).addTo(grupo);
+  // ambos clicáveis: o contorno alarga a área de clique
+  for (const linha of [
+    L.polyline(rota.coords, { color: "#fff", weight: 8, opacity: 0.9, ...opcoes }),
+    L.polyline(rota.coords, { color: corDoDia(n), weight: 4.5, opacity: 0.95, ...opcoes }),
+  ]) {
+    linha
+      .bindTooltip(`Dia ${n}${dia ? ` · ${dia.titulo}` : ""}`, { sticky: true })
+      .on("click", () => selecionarDia(n))
+      .addTo(grupo);
+  }
 }
 
 // ---------- Formatação ----------
