@@ -48,6 +48,12 @@ O código vive em `menorca-roteiro/` (raiz do repositório git).
   (um RTF só com nome, dia e descrição). Devem ser verificadas, sobretudo os
   parques de estacionamento das calas (Turqueta, Macarella, Mitjana, Pilar,
   Algaiarens, Presili).
+- Textos (títulos, `notas` dos dias, descrições) sincronizados com o roteiro do
+  utilizador em 2026-10-06. Diferenças de dados adiadas pelo utilizador: dia 3 tem
+  Santo Tomás e Son Bou como `carro` (o dia devia ser só barco desde Galdana); dia 8
+  liga alternativas numa só rota e falta Cala Morell; Cala en Brut sem paragem;
+  nomes diferem do texto (Maó/Mahón, Binibeca/Binibèquer, Trebaluger/Trebalúger,
+  Far/Faro); Ciutadella com zona "Centro" em vez de "Oeste".
 - `npm install && npm run build` correm sem erros (Vite 5). `npm audit` avisa de
   vulnerabilidades no esbuild do servidor de dev; corrigir exige Vite 6+, adiado.
 - Ideias possíveis (não pedidas ainda): links de navegação por paragem,

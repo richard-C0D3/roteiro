@@ -113,7 +113,10 @@ function renderResumo(): void {
   const aviso = rota?.aproximada
     ? `<span class="nota">Serviço de rotas indisponível: valores em linha reta.</span>`
     : "";
-  elResumo.innerHTML = `<h2 style="--cor:${dia.cor}">${dia.titulo}</h2><p>${info} ${partida} ${aviso}</p>`;
+  const notas = dia.notas?.length
+    ? `<ul class="notas">${dia.notas.map((n) => `<li>${n}</li>`).join("")}</ul>`
+    : "";
+  elResumo.innerHTML = `<h2 style="--cor:${dia.cor}">${dia.titulo}</h2><p>${info} ${partida} ${aviso}</p>${notas}`;
 }
 
 function renderParagens(): void {

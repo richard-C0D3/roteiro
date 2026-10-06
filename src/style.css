@@ -91,6 +91,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .resumo p { margin: 0; line-height: 1.5; }
 .nota { display: block; color: var(--pedra); font-size: 0.875rem; margin-top: 2px; }
+.notas { margin: 10px 0 0; padding-left: 1.1em; font-size: 0.9rem; line-height: 1.45; }
+.notas li + li { margin-top: 4px; }
 
 /* ---------- Lista ---------- */
 .paragens {
