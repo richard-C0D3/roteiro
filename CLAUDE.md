@@ -12,6 +12,7 @@ O utilizador fala português (PT-PT); textos da interface e comentários em port
 - Fontes Google: Young Serif (títulos) e Figtree (texto)
 
 Comandos: `npm install`, `npm run dev`, `npm run build` (faz `tsc` + `vite build` para `dist/`).
+O código vive em `menorca-roteiro/` (raiz do repositório git).
 
 ## Estrutura
 
@@ -47,8 +48,18 @@ Comandos: `npm install`, `npm run dev`, `npm run build` (faz `tsc` + `vite build
   (um RTF só com nome, dia e descrição). Devem ser verificadas, sobretudo os
   parques de estacionamento das calas (Turqueta, Macarella, Mitjana, Pilar,
   Algaiarens, Presili).
-- O projeto ainda não foi corrido com dependências instaladas; o TypeScript foi
-  validado apenas com um stub do Leaflet. Primeiro passo: `npm install && npm run build`
-  e corrigir o que aparecer.
+- `npm install && npm run build` correm sem erros (Vite 5). `npm audit` avisa de
+  vulnerabilidades no esbuild do servidor de dev; corrigir exige Vite 6+, adiado.
 - Ideias possíveis (não pedidas ainda): links de navegação por paragem,
-  exportar GPX por dia, editar a ordem por arrastar, servidor OSRM próprio.
+  exportar GPX por dia, editar a ordem por arrastar, servidor OSRM próprio,
+  pré-calcular rotas para JSON no build (evita depender do OSRM público).
+
+## Publicação
+
+- Repositório público: https://github.com/richard-C0D3/roteiro (branch `main`).
+- GitHub Pages via Actions (`.github/workflows/deploy.yml`): cada push para `main`
+  faz build e publica `dist/` em https://richard-c0d3.github.io/roteiro/
+- `vite.config.ts` tem `base: "/roteiro/"`; se o repositório mudar de nome, mudar aqui.
+- O remote usa `https://richard-C0D3@github.com/...` para o Keychain usar o token
+  dessa conta; a conta git global da máquina (brainunknown) não deve ser alterada.
+- A página é pública: a `BASE` (alojamento) fica visível para quem tiver o link.
